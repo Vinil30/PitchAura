@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('brand_asset') }}?v=2">
+    <title>Business Dashboard | PitchAura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard-business.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/polish.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('brand_logo') }}" alt="" width="24" height="24" style="width:24px;height:24px;border-radius:6px;object-fit:cover;display:block;">
+            <span>PitchAura</span>
+        </div>
+        <button class="login-btn">Log Out</button>
+    </header>
+
+    <div class="dashboard-header">
+        <h1>Business Dashboard</h1>
+        <div class="user-menu">
+            <span>{{ fullname }}</span>
+            <div class="user-avatar">{{ fullname[0] }}{{ fullname.split(' ')[1][0] if fullname and ' ' in fullname else fullname[0] }}</div>
+        </div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <a href="#dashboard" class="nav-item active" data-section="dashboard">Dashboard</a>
+        <a href="#proposals" class="nav-item" data-section="proposals">Proposals</a>
+        <a href="#preferences" class="nav-item" data-section="preferences">Preferences</a>
+        <a href="#analytics" class="nav-item" data-section="analytics">Analytics</a>
+    </nav>
+
+    <div class="dashboard-content">
+        <!-- Dashboard Section -->
+        <div class="content-section active" id="dashboard-section">
+            <div class="section-header">
+                <h2>Business Overview</h2>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refresh-proposals">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.51 9C4.01717 7.56678 4.87913 6.2854 6.01547 5.27542C7.1518 4.26543 8.52547 3.55976 10.0083 3.22426C11.4911 2.88875 13.0348 2.93434 14.4952 3.35677C15.9556 3.77921 17.2853 4.56471 18.36 5.64L23 10M1 14L5.64 18.36C6.71475 19.4353 8.04437 20.2208 9.50481 20.6432C10.9652 21.0657 12.5089 21.1113 13.9917 20.7757C15.4745 20.4402 16.8482 19.7346 17.9845 18.7246C19.1209 17.7146 19.9828 16.4332 20.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Refresh Proposals
+                    </button>
+                    <select class="filter-select" id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Marketing Services">Marketing Services</option>
+                        <option value="Partnerships">Partnerships</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Staffing">Staffing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stats-grid dashboard-stats-grid" id="dashboard-stats">
+                <!-- Quick stats will be loaded here -->
+            </div>
+
+            <div class="section-header compact-header">
+                <h2>Latest Submissions</h2>
+            </div>
+            
+            <div class="proposal-cards dashboard-submissions" id="proposals-container">
+                <!-- Proposals will be loaded dynamically -->
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading submissions...</p>
+                </div>
+            </div>
+
+            <div class="dashboard-workspace">
+                <div class="dashboard-panel">
+                    <div class="panel-heading">
+                        <h3>Intake Pipeline</h3>
+                        <span>Live proposal flow</span>
+                    </div>
+                    <div class="pipeline-board" id="intake-pipeline">
+                        <!-- Pipeline will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="dashboard-panel">
+                    <div class="panel-heading">
+                        <h3>Action Queue</h3>
+                        <span>What needs attention</span>
+                    </div>
+                    <div class="action-list" id="dashboard-actions">
+                        <!-- Actions will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proposals Section -->
+        <div class="content-section" id="proposals-section">
+            <div class="section-header">
+                <h2>All Proposals</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="new-proposal-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        New Proposal Request
+                    </button>
+                </div>
+            </div>
+            
+            <div class="proposals-container" id="all-proposals-container">
+                <!-- All proposals will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Preferences Section -->
+        <div class="content-section" id="preferences-section">
+            <div class="section-header">
+                <h2>AI Matching Preferences</h2>
+            </div>
+            
+            <div class="preferences-form" id="preferences-form">
+                <!-- Preferences form will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div class="content-section" id="analytics-section">
+            <div class="section-header">
+                <h2>Proposal Analytics</h2>
+            </div>
+            
+            <div class="stats-grid" id="analytics-container">
+                <!-- Analytics will be loaded dynamically -->
+            </div>
+            
+            <div class="analytics-charts">
+                <div class="chart-container">
+                    <h3>Proposals by Category</h3>
+                    <div class="chart-placeholder" id="category-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Match Score Distribution</h3>
+                    <div class="chart-placeholder" id="match-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- New Proposal Modal -->
+    <div class="modal" id="new-proposal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Proposal Request</h3>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <form id="new-proposal-form">
+                <div class="form-group">
+                    <label class="form-label">Proposal Title</label>
+                    <input type="text" class="form-input" name="title" placeholder="e.g., E-commerce Website Development" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" name="category" required>
+                        <option value="">Select Category</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Marketing Services">Marketing Services</option>
+                        <option value="Partnerships">Partnerships</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Staffing">Staffing</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Budget Range</label>
+                    <div class="form-row">
+                        <input type="number" class="form-input" name="budget_min" placeholder="Minimum" required>
+                        <input type="number" class="form-input" name="budget_max" placeholder="Maximum" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Project Description</label>
+                    <textarea class="form-textarea" name="description" placeholder="Describe your project requirements..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Timeline</label>
+                    <input type="text" class="form-input" name="timeline" placeholder="e.g., 3-6 months" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancel-proposal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Proposal Request</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+
+    <footer>
+        <!-- Footer content remains the same -->
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/dashboard-business.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/polish.js') }}"></script>
+</body>
+</html>
