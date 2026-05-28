@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('brand_asset') }}?v=2">
+    <title>Investor Dashboard | PitchAura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard-investor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/polish.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('brand_logo') }}" alt="" width="24" height="24" style="width:24px;height:24px;border-radius:6px;object-fit:cover;display:block;">
+            <span>PitchAura</span>
+        </div>
+        <button class="login-btn">Log Out</button>
+    </header>
+
+    <div class="dashboard-header">
+        <h1>Investor Dashboard</h1>
+        <div class="user-menu">
+            <span>{{ fullname }}</span>
+            <div class="user-avatar">{{ fullname[0] }}{{ fullname.split(' ')[1][0] if fullname and ' ' in fullname else fullname[0] }}</div>
+        </div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <a href="#opportunities" class="nav-item active" data-section="opportunities">Opportunities</a>
+        <a href="#portfolio" class="nav-item" data-section="portfolio">My Portfolio</a>
+        <a href="#preferences" class="nav-item" data-section="preferences">Preferences</a>
+        <a href="#analytics" class="nav-item" data-section="analytics">Analytics</a>
+        <a href="#summaries" class="nav-item" data-section="summaries">Summaries</a>
+    </nav>
+ 
+    <div class="dashboard-content">
+        <div class="investor-overview">
+            <div>
+                <p class="eyebrow">Investor Workspace</p>
+                <h2>Review matched pitches with context, confidence, and next steps.</h2>
+                <p>Use the feed to accept strong fits, save borderline opportunities for a summary, and keep your preferences tuned as the AI learns what matters.</p>
+            </div>
+            <div class="overview-steps">
+                <span>1. Refresh feed</span>
+                <span>2. Review match context</span>
+                <span>3. Decide yes, maybe, or no</span>
+            </div>
+        </div>
+
+        <!-- Opportunities Section -->
+        <div class="content-section active" id="opportunities-section">
+            <div class="section-header">
+                <h2>AI-Matched Opportunities</h2>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refresh-opportunities">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.51 9C4.01717 7.56678 4.87913 6.2854 6.01547 5.27542C7.1518 4.26543 8.52547 3.55976 10.0083 3.22426C11.4911 2.88875 13.0348 2.93434 14.4952 3.35677C15.9556 3.77921 17.2853 4.56471 18.36 5.64L23 10M1 14L5.64 18.36C6.71475 19.4353 8.04437 20.2208 9.50481 20.6432C10.9652 21.0657 12.5089 21.1113 13.9917 20.7757C15.4745 20.4402 16.8482 19.7346 17.9845 18.7246C19.1209 17.7146 19.9828 16.4332 20.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Refresh Opportunities
+                    </button>
+                    <div class="filter-bar">
+                        <select class="filter-select" id="industry-filter">
+                            <option value="">All Industries</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Consumer Goods">Consumer Goods</option>
+                            <option value="Financial Services">Financial Services</option>
+                        </select>
+                        <select class="filter-select" id="stage-filter">
+                            <option value="">All Stages</option>
+                            <option value="Pre-Seed">Pre-Seed</option>
+                            <option value="Seed">Seed</option>
+                            <option value="Series A">Series A</option>
+                            <option value="Series B+">Series B+</option>
+                        </select>
+                        <select class="filter-select" id="sort-filter">
+                            <option value="match_score">Sort by: Match Score</option>
+                            <option value="recent">Sort by: Recent</option>
+                            <option value="funding">Sort by: Funding Amount</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pitch-cards" id="opportunities-container">
+                <!-- Opportunities will be loaded dynamically -->
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading opportunities...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Section -->
+        <div class="content-section" id="portfolio-section">
+            <div class="section-header">
+                <h2>Investment Portfolio</h2>
+            </div>
+            
+            <div class="portfolio-grid" id="portfolio-container">
+                <!-- Portfolio items will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Preferences Section -->
+        <div class="content-section" id="preferences-section">
+            <div class="section-header">
+                <h2>Investment Preferences</h2>
+            </div>
+            
+            <div class="preferences-form" id="preferences-form">
+                <!-- Preferences form will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div class="content-section" id="analytics-section">
+            <div class="section-header">
+                <h2>Investment Analytics</h2>
+            </div>
+            
+            <div class="stats-grid" id="analytics-container">
+                <!-- Analytics will be loaded dynamically -->
+            </div>
+            
+            <div class="analytics-charts">
+                <div class="chart-container">
+                    <h3>Decision History</h3>
+                    <div class="chart-placeholder" id="decision-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Recent Decisions</h3>
+                    <div class="chart-placeholder" id="performance-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summaries Section -->
+        <div class="content-section" id="summaries-section">
+            <div class="section-header">
+                <h2>Pitch Summaries</h2>
+            </div>
+            
+            <div class="summaries-container" id="summaries-container">
+                <!-- Summaries will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content remains the same -->
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/dashboard-investor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/polish.js') }}"></script>
+</body>
+</html>
