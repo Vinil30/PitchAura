@@ -1,0 +1,560 @@
+:root{--bg:#ffffff;--muted:#6b7280;--card:#f8fafc;--accent:#0f172a;--accent-2:#111827;--primary:#0b5fff}
+        *{box-sizing:border-box}
+        body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:var(--bg); color:#0f172a}
+        a{color:inherit;text-decoration:none}
+        header{display:flex;justify-content:space-between;align-items:center;padding:18px 36px;border-bottom:1px solid #eef2f7}
+        .logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size: 20px;}
+        .login-btn{background:var(--accent-2);color:#fff;padding:8px 14px;border-radius:6px;border:0;font-weight:600}
+
+        .hero{padding:72px 20px;text-align:center}
+        .hero h1{font-size:28px;margin:0 0 12px;font-weight:700}
+        .hero p{max-width:760px;margin:0 auto 18px;color:var(--muted);line-height:1.5}
+        .cta{display:inline-block;background:var(--accent-2);color:#fff;padding:10px 18px;border-radius:8px;font-weight:700}
+
+        .section{max-width:1100px;margin:40px auto;padding:0 20px}
+        .section h3{font-size:18px;margin:0 0 18px;text-align:center}
+
+        /* Platform Overview */
+        .overview{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        .card{background:#fff;border:1px solid #eef2f7;border-radius:8px;padding:18px;box-shadow:0 1px 0 rgba(16,24,40,0.03)}
+        .card .icon{width:36px;height:36px;border-radius:8px;background:#eef2ff;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+        .card h4{margin:0 0 6px;font-size:15px}
+        .card p{margin:0;color:var(--muted);font-size:14px}
+
+        /* Capabilities grid */
+        .capabilities{margin-top:10px}
+        .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+        .small-card{background:var(--card);border:1px solid #eef2f7;border-radius:8px;padding:12px;min-height:72px}
+        .small-card h5{margin:0 0 6px;font-size:13px}
+        .small-card p{margin:0;color:var(--muted);font-size:13px}
+
+        /* How it works */
+        .how{display:grid;grid-template-columns:1fr;gap:18px}
+        .steps{display:flex;flex-direction:column;gap:12px}
+        .step{display:flex;gap:12px;align-items:flex-start}
+        .step .num{width:28px;height:28px;border-radius:999px;background:#0b5fff;color:white;display:flex;align-items:center;justify-content:center;font-weight:700}
+        .step h6{margin:0;font-size:15px}
+        .step p{margin:4px 0 0;color:var(--muted);font-size:14px}
+
+        /* Analytics */
+        .analytics{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+        .muted-card{background:#fff;border:1px solid #eef2f7;border-radius:8px;padding:14px}
+
+        /* CTA Dark */
+        .cta-dark{background:#0b1220;color:#fff;padding:36px 20px;border-radius:8px;margin-top:26px;text-align:center}
+        .cta-dark p{color:#cbd5e1;margin:10px 0 18px}
+        .cta-dark .trial{background:#fff;color:#0b1220;padding:10px 16px;border-radius:8px;font-weight:700}
+        .cta-dark .trial:hover{cursor: pointer;}
+
+        footer{max-width:1100px;margin:34px auto;padding:20px;text-align:left;color:var(--muted);border-top:1px solid #f1f5f9}
+        @media (max-width:900px){.overview,.cap-grid{grid-template-columns:repeat(1,1fr)}.cap-grid{grid-auto-rows:1fr}.analytics{grid-template-columns:repeat(1,1fr)}header{padding:12px 18px}}
+
+        /* Entrepreneur Dashboard Specific Styles */
+        .dashboard-header{display:flex;justify-content:space-between;align-items:center;padding:20px 36px;background:var(--card);border-bottom:1px solid #eef2f7}
+        .dashboard-header h1{font-size:24px;margin:0}
+        .user-menu{display:flex;align-items:center;gap:12px}
+        .user-avatar{width:36px;height:36px;border-radius:50%;background:#0b5fff;color:white;display:flex;align-items:center;justify-content:center;font-weight:600}
+        
+        .dashboard-nav{display:flex;gap:24px;padding:0 36px;border-bottom:1px solid #eef2f7}
+        .nav-item{padding:14px 0;font-weight:500;position:relative}
+        .nav-item.active{color:var(--primary)}
+        .nav-item.active:after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--primary)}
+        
+        .dashboard-content{padding:24px 36px}
+        .content-section{margin-bottom:36px}
+        .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+        .section-header h2{font-size:20px;margin:0}
+        
+        .pitch-cards{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:18px}
+        .pitch-card{background:#fff;border:1px solid #eef2f7;border-radius:8px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        .pitch-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+        .pitch-title{font-weight:600;margin:0 0 4px}
+        .pitch-category{font-size:12px;color:var(--muted);margin:0}
+        .pitch-status{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600}
+        .status-pending{color:#d97706}
+        .status-review{color:#0b5fff}
+        .status-matched{color:#059669}
+        .status-rejected{color:#dc2626}
+        .pitch-summary{font-size:14px;color:var(--muted);line-height:1.5;margin:12px 0}
+        .pitch-actions{display:flex;gap:8px;margin-top:14px}
+        .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:6px;font-weight:500;font-size:14px;cursor:pointer;border:none}
+        .btn-primary{background:var(--primary);color:white}
+        .btn-outline{background:transparent;border:1px solid #d1d5db;color:var(--accent)}
+        .btn-success{background:#059669;color:white}
+        .btn-danger{background:#dc2626;color:white}
+        
+        .pitch-form{background:#fff;border:1px solid #eef2f7;border-radius:8px;padding:24px}
+        .form-group{margin-bottom:18px}
+        .form-label{display:block;margin-bottom:6px;font-weight:500}
+        .form-input, .form-select, .form-textarea{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:6px;font-family:inherit;font-size:14px}
+        .form-textarea{min-height:100px;resize:vertical}
+        .form-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+        
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+        .stat-card{background:#fff;border:1px solid #eef2f7;border-radius:8px;padding:18px;text-align:center}
+        .stat-value{font-size:28px;font-weight:700;margin:0 0 6px}
+        .stat-label{font-size:14px;color:var(--muted);margin:0}
+        
+        .investor-matches{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:18px}
+        .investor-card{background:#fff;border:1px solid #eef2f7;border-radius:8px;padding:18px;text-align:center}
+        .investor-avatar{width:60px;height:60px;border-radius:50%;background:#eef2ff;color:#0b5fff;display:flex;align-items:center;justify-content:center;font-weight:600;margin:0 auto 12px;font-size:20px}
+        .investor-name{font-weight:600;margin:0 0 4px}
+        .investor-focus{font-size:14px;color:var(--muted);margin:0 0 12px}
+        .investor-match{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#059669;background:#f0fdf4;padding:4px 8px;border-radius:999px}
+        
+        .ai-questions{background:#f8fafc;border-radius:8px;padding:18px;margin-top:24px}
+        .question-group{margin-bottom:18px}
+        .question-text{font-weight:500;margin-bottom:8px}
+        
+        .tab-container{margin-top:24px}
+        .tabs{display:flex;border-bottom:1px solid #eef2f7;margin-bottom:18px}
+        .tab{background:none;border:none;padding:10px 16px;font-weight:500;cursor:pointer;color:var(--muted)}
+        .tab.active{color:var(--primary);border-bottom:2px solid var(--primary)}
+        .tab-content{display:none}
+        .tab-content.active{display:block}
+        .pitch-review {
+    max-width: 800px;
+}
+
+.review-section {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.review-section h4 {
+    margin: 0 0 15px 0;
+    color: #1e293b;
+    font-size: 16px;
+}
+
+.review-item {
+    display: flex;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.review-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.review-item strong {
+    min-width: 180px;
+    color: #475569;
+    font-weight: 600;
+}
+
+.review-item span {
+    flex: 1;
+    color: #1e293b;
+}
+
+.review-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+.login-btn:hover{
+    cursor: pointer;
+}
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1f2937;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    color: #374151;
+    background-color: #f3f4f6;
+    border-radius: 50%;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+/* Pitch Details Styles */
+.pitch-detail-section {
+    margin-bottom: 24px;
+}
+
+.pitch-detail-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #374151;
+    border-bottom: 1px solid #eef2f7;
+    padding-bottom: 8px;
+}
+
+.detail-item {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #4b5563;
+    font-size: 0.875rem;
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    color: #1f2937;
+    line-height: 1.5;
+}
+
+/* Navigation Active States */
+.dashboard-nav .nav-item.active {
+    color: #0b5fff;
+    border-bottom: 2px solid #0b5fff;
+}
+
+/* Content Sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Enhanced Pitch Cards */
+.pitch-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pitch-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Status Badges */
+.pitch-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.status-matched {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-review {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.status-rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Polished entrepreneur workspace */
+:root {
+    --bg: #f6f7f9;
+    --primary: #111827;
+    --accent: #111827;
+    --accent-2: #111827;
+    --muted: #64748b;
+}
+
+body {
+    background: #f6f7f9;
+}
+
+header,
+.dashboard-header,
+.dashboard-nav {
+    background: rgba(255,255,255,0.94);
+}
+
+.dashboard-header {
+    padding: 24px 36px;
+}
+
+.dashboard-header p {
+    margin: 0;
+    color: #64748b;
+}
+
+.dashboard-nav {
+    gap: 2px;
+    background: #fff;
+}
+
+.nav-item {
+    padding: 14px 18px;
+    color: #64748b;
+}
+
+.nav-item:hover {
+    background: #f8fafc;
+    color: #111827;
+}
+
+.nav-item.active {
+    color: #111827;
+}
+
+.nav-item.active:after {
+    background: #111827;
+}
+
+.dashboard-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 28px 36px 44px;
+}
+
+.entrepreneur-overview {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    padding: 26px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+}
+
+.entrepreneur-overview .eyebrow {
+    margin: 0 0 8px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.entrepreneur-overview h1 {
+    max-width: 760px;
+    margin: 0 0 10px;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.entrepreneur-overview p {
+    max-width: 760px;
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.founder-stats,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    text-align: left;
+    border-color: #e5e7eb;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+}
+
+.stat-value {
+    color: #111827;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 18px;
+}
+
+.dashboard-panel,
+.pitch-card,
+.investor-card,
+.pitch-form,
+.review-section {
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
+}
+
+.dashboard-panel {
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.action-list,
+.activity-list {
+    display: grid;
+    gap: 10px;
+}
+
+.action-item,
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.action-item {
+    display: block;
+}
+
+.action-item strong,
+.activity-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #111827;
+}
+
+.action-item span,
+.activity-item span {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.activity-status {
+    align-self: center;
+    white-space: nowrap;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.pitch-cards,
+.investor-matches {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+}
+
+.pitch-card,
+.investor-card {
+    min-height: 220px;
+}
+
+.pitch-title {
+    font-size: 18px;
+    line-height: 1.25;
+}
+
+.pitch-category {
+    margin-top: 6px;
+}
+
+.pitch-summary {
+    color: #475569;
+}
+
+.btn-primary {
+    background: #111827;
+}
+
+.btn-outline {
+    background: #fff;
+}
+
+.investor-card {
+    text-align: left;
+}
+
+.investor-avatar {
+    margin: 0 0 14px;
+    background: #111827;
+    color: #fff;
+}
+
+.investor-match {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+@media (max-width: 900px) {
+    .dashboard-content,
+    .dashboard-header {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .entrepreneur-overview,
+    .action-item,
+    .activity-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .dashboard-grid,
+    .founder-stats,
+    .stats-grid,
+    .pitch-cards,
+    .investor-matches,
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
