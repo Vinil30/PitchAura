@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('brand_asset') }}?v=2">
+    <title>Login | PitchAura</title>
+    <link rel="stylesheet" href="static/css/login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/polish.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('brand_logo') }}" alt="" width="24" height="24" style="width:24px;height:24px;border-radius:6px;object-fit:cover;display:block;">
+            <span>PitchAura</span>
+        </div>
+        <a href="#" class="login-btn">Home</a>
+    </header>
+
+    <div class="login-section">
+        <h1>Sign In to Your Account</h1>
+        
+        <div class="role-selector">
+            <div class="role-option" data-role="business">
+                <div class="icon">🏢</div>
+                <h3>Business</h3>
+            </div>
+            <div class="role-option" data-role="entrepreneur">
+                <div class="icon">🚀</div>
+                <h3>Entrepreneur</h3>
+            </div>
+            <div class="role-option" data-role="investor">
+                <div class="icon">💰</div>
+                <h3>Investor</h3>
+            </div>
+        </div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn-full">Sign In</button>
+            
+            <div class="login-options">
+                <div>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <a href="#">Forgot password?</a>
+            </div>
+        </form>
+        
+        <div class="signup-link">
+            Don't have an account? <a href="#">Sign up</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 PitchAura. All rights reserved.</p>
+    </footer>
+
+<script src="static/js/login.js"></script>   
+    <script src="{{ url_for('static', filename='js/polish.js') }}"></script>
+</body>
+</html>

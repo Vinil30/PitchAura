@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('brand_asset') }}?v=2">
+    <title>Submit Proposal | PitchAura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/submit-proposal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/polish.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('brand_logo') }}" alt="" width="24" height="24" style="width:24px;height:24px;border-radius:6px;object-fit:cover;display:block;">
+            <span>PitchAura</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-header">
+            <h1>Submit Proposal to {{ business_name }}</h1>
+            <p>Fill out the form below to submit your proposal. Our AI will match your submission with the business's preferences.</p>
+        </div>
+
+        <form id="proposal-form" class="proposal-form">
+            <div class="form-section">
+                <h3>Your Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Your Name *</label>
+                        <input type="text" class="form-input" name="submitter_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your Email *</label>
+                        <input type="email" class="form-input" name="submitter_email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Company Name</label>
+                    <input type="text" class="form-input" name="company_name">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Proposal Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Proposal Title *</label>
+                    <input type="text" class="form-input" name="title" placeholder="e.g., E-commerce Website Development" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Category *</label>
+                    <select class="form-select" name="category" required>
+                        <option value="">Select Category</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Marketing Services">Marketing Services</option>
+                        <option value="Partnerships">Partnerships</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Staffing">Staffing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project Description *</label>
+                    <textarea class="form-textarea" name="description" placeholder="Describe your proposal in detail..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Proposed Budget ($) *</label>
+                        <input type="number" class="form-input" name="budget" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Timeline *</label>
+                        <input type="text" class="form-input" name="timeline" placeholder="e.g., 3-6 months" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Additional Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Technology Stack (for Web Development)</label>
+                    <select class="form-select" name="technologies" multiple>
+                        <option value="React">React</option>
+                        <option value="Node.js">Node.js</option>
+                        <option value="Python/Django">Python/Django</option>
+                        <option value="PHP/Laravel">PHP/Laravel</option>
+                        <option value="Vue.js">Vue.js</option>
+                        <option value="Angular">Angular</option>
+                        <option value="Java/Spring">Java/Spring</option>
+                        <option value=".NET">.NET</option>
+                    </select>
+                    <p class="form-help">Hold Ctrl/Cmd to select multiple options</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Relevant Experience</label>
+                    <textarea class="form-textarea" name="experience" placeholder="Describe your relevant experience and past projects..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Portfolio URL</label>
+                    <input type="url" class="form-input" name="portfolio_url" placeholder="https://">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-large">
+                    <span class="btn-text">Submit Proposal</span>
+                    <div class="loading-spinner" style="display: none;"></div>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Proposal Submitted Successfully!</h3>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">✓</div>
+                <p>Your proposal has been submitted and is being evaluated by our AI system.</p>
+                <p><strong>Match Score: <span id="match-score"></span>%</strong></p>
+                <p>The business will review your proposal and contact you if it matches their requirements.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeSuccessModal()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/submit-proposal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/polish.js') }}"></script>
+</body>
+</html>
